@@ -4,9 +4,12 @@ addProduct({
     id: '1',
     title: 'P1',
     createdAt: new Date(),
+    updatedAt: new Date(),
     stock: 90,
     category: {
       id: '12',
-      name: 'C1'
+      name: 'C1',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }
   });
