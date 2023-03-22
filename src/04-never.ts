@@ -9,6 +9,8 @@ const fail = (message: string) => {
   throw new Error(message);
 }
 
+
+//También termina una función al invocar una excepción. fail() => never
 const example = (input: unknown)  => {
   if (typeof input === 'string') {
     return 'es un string';
