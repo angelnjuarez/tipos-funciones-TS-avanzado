@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { Product } from "./product.model";
-import { CreateProductDto, UpdateProductDto} from "./product.dto";
+import { CreateProductDto, UpdateProductDto , FindProductDto} from "./product.dto";
 
 export const products: Product[] = [];
 
@@ -21,11 +21,11 @@ export const addProduct = (data: CreateProductDto): Product => {
   return newProduct;
 }
 
-export const updateProduct = (id: string, change: UpdateProductDto): Product => {
+export const updateProduct = (id: Product['id'], change: UpdateProductDto): Product => { //obtenemos el tipo de dato de la propiedad id de Product, evita errores de cambio de tipado
   let index = getIndexProduct(id);
   const prevDta = products[index];
   products[index] = {
-    ...prevDta,
+    ...prevDta, //operador spread evita el aliasing, al apuntar dos variables a la misma referencia de memoria
     ...change,
   }
   return products[index];
@@ -38,4 +38,11 @@ export const deleteProduct = (id: string): void => {
 
 export const getIndexProduct = (id: string): number => {
   return products.findIndex((product) => product.id === id);
+};
+
+export const findProduct = (dto: FindProductDto): Product[] => {
+  //code
+  //  dto.color = 'red'; //Esto no se puede hacer, porque es de solo
+  //dto.tags?.pop(); //Esto si se puede hacer y está mutando el objeto. Se soluciona con omit y readonly en prduct.dto.ts
+  return products;
 };
